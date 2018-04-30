@@ -7,7 +7,7 @@ const keys = require('./config/keys');
 const app = express();
 
 passport.use(
-  new GoogleStrategy(
+  new GoogleStrategy(    // google strategy
     {
       clientID: keys.googleClientID,
       clientSecret: keys.googleClientSecret,
@@ -17,6 +17,13 @@ passport.use(
     console.log(accessToken);
     }
   )
+);
+
+app.get(
+  '/auth/google',   // authentication from passport
+  passport.authenticate('google',{
+    scope: ['profile', 'email']
+  })
 );
 
 // app.get('/', (req, res)=>{  // whole function is route handler
