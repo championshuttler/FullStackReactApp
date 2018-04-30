@@ -26,6 +26,10 @@ app.get(
   })
 );
 
+app.get('/auth/google/callback', 
+    passport.authenticate('google'));
+
+
 // app.get('/', (req, res)=>{  // whole function is route handler
 //   res.send({ bye : 'buddy'});
 // }); 
