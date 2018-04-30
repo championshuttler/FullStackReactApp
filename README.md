@@ -1,17 +1,4 @@
-# Full Stack React App
-
-## Review App 
+# emaily - Review App 
 
 ## Tech Stack 
-
-### Frontend
-React and Redux
-
-### Backend
-NodeJS and ExpressJS
-
-### Database
-MongoDB
-
-### Auth
-Google OAuth
+React, Redux, Express, NodeJS, mongoDB , passportJS

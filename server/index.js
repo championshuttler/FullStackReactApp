@@ -1,11 +1,23 @@
 const express = require('express'); // CommonJS module
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const keys = require('./config/keys');
 
 // import express from 'express'; // for react side code
 const app = express();
 
-passport.use(new GoogleStrategy());
+passport.use(
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback'
+    },
+    accessToken => {
+    console.log(accessToken);
+    }
+  )
+);
 
 // app.get('/', (req, res)=>{  // whole function is route handler
 //   res.send({ bye : 'buddy'});
