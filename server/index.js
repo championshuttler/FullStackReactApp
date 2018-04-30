@@ -5,7 +5,7 @@ const app = express();
 
 app.get('/', (req, res)=>{  // whole function is route handler
   res.send({ bye : 'buddy'});
-});
+}); 
 
 const PORT = process.env.PORT || 5000; // port from heroku or something else
 
