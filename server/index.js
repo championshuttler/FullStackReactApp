@@ -1,8 +1,11 @@
 const express = require('express'); // CommonJS module
+const mongoose = require('mongoose');
 require('./services/passport');
-
+const keys = require('./config/keys');
 
 // import express from 'express'; // for react side code
+
+mongoose.connect(keys.mongoURI);
 const app = express();
 
 require('./routes/authRoutes')(app);
