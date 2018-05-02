@@ -1,8 +1,9 @@
 const express = require('express'); // CommonJS module
 const mongoose = require('mongoose');
-require('./services/passport');
 const keys = require('./config/keys');
-require('./models/user');
+require('./models/user');         // changed the sequence due to error "Schema hasn't been registered for model "users"."
+require('./services/passport');
+
 
 // import express from 'express'; // for react side code
 
