@@ -6,14 +6,25 @@ const keys = require('../config/keys');
 const user = mongoose.model('users');
 
 passport.use(
-    new GoogleStrategy(    // google strategy
-      {
-        clientID: keys.googleClientID,
-        clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback'
-      },
-      (accessToken, refreshToken, profile, done) => {
-        new user({ googleId: profile.id }).save(); // save to save data to mongoDB
-      }
-    )
-  );
+  new GoogleStrategy(    // google strategy
+    {
+      clientID: keys.googleClientID,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback'
+    },
+    (accessToken, refreshToken, profile, done) => {
+
+      user.findOne({ googleId: profile.id })
+        .then((existingUser) =>{
+          if(existingUser) {
+            // We dont need to add id to database again
+          }else{
+            // Create record into database
+            new user({ googleId: profile.id }).save(); // save to save data to mongoDB
+          }
+        })
+
+      
+    }
+  )
+);
