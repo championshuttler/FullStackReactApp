@@ -15,16 +15,19 @@ passport.use(
     (accessToken, refreshToken, profile, done) => {
 
       user.findOne({ googleId: profile.id })
-        .then((existingUser) =>{
-          if(existingUser) {
+        .then((existingUser) => {
+          if (existingUser) {
             // We dont need to add id to database again
-          }else{
+            done(null, existingUser);
+          } else {
             // Create record into database
-            new user({ googleId: profile.id }).save(); // save to save data to mongoDB
+            new user({ googleId: profile.id }).save() // save to save data to mongoDB
+              .save()
+              .then(user => done(null, user));
           }
         })
 
-      
+
     }
   )
 );
