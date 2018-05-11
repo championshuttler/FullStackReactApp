@@ -5,8 +5,17 @@ const keys = require('../config/keys');
 
 const user = mongoose.model('users');
 
-passport.serializeUser((user, done) => { //
+
+// used to serialize the user for the session
+passport.serializeUser((user, done) => {  // to generate identifying piece to save in session 
   done(null, user.id);
+});
+
+// used to deserialize the user
+passport.deserializeUser((id, done) => {
+  user.findById(id).then(user => {
+    done(null, user)
+  });
 });
 
 passport.use(
